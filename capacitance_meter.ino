@@ -144,8 +144,8 @@ void bigCap(){
       
       int digVal;
       
-      Serial.print(F("before reading "));
-        Serial.println(volts(analogRead(OUT_PIN)));
+      //Serial.print(F("before reading "));
+      //Serial.println(volts(analogRead(OUT_PIN)));
       
       do{
         
@@ -182,11 +182,11 @@ void bigCap(){
         Serial.println(Vmin);
         
         
-        Serial.print(F("After reading "));
-        Serial.println(volts(analogRead(OUT_PIN)));
+        //Serial.print(F("After reading "));
+        //Serial.println(volts(analogRead(OUT_PIN)));
         
         //delay(5000);
-        Serial.print(F("Discharging..."));
+        //Serial.print(F("Discharging..."));
         
         //Discharge capacitor for next measurement
         digitalWrite(IN_PIN, HIGH);
@@ -197,10 +197,10 @@ void bigCap(){
         digitalWrite(IN_PIN, LOW);
         
         while(volts(analogRead(OUT_PIN))>0.01);
-        Serial.print(F("Done.\n"));
+        //Serial.print(F("Done.\n"));
         
-        Serial.print(F("After DISCH long "));
-        Serial.println((analogRead(OUT_PIN)));
+        //Serial.print(F("After DISCH long "));
+        //Serial.println((analogRead(OUT_PIN)));
         
         
         //Calculate and print result
@@ -342,12 +342,13 @@ void serialEvent(){
       }
     }
 }
+
 //
 long readVcc() {
   long result;
   // Read 1.1V reference against AVcc
   ADMUX = _BV(REFS0) | _BV(MUX3) | _BV(MUX2) | _BV(MUX1);
-  //delay(2); // Wait for Vref to settle
+  delay(2); // Wait for Vref to settle
   ADCSRA |= _BV(ADSC); // Convert
   while (bit_is_set(ADCSRA,ADSC));
   result = ADCL;
